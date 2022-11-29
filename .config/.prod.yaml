@@ -1,0 +1,21 @@
+COOKIE_DOMAIN: "app.thedtstar.com"
+MYSQL_CONFIG:
+  type: "mysql"
+  host: "10.0.0.6"
+  port: 65533
+  username: "root"
+  password: "6ZJg*GcWc*KkevvKX8"
+  database: "lawsuit"
+  synchronize: true
+
+WEAPP_CONFIG:
+  APPID: wx5a98f80f4f0faea3
+  APPSECRET: 185ce6d9549e4ceb18e216f3fa601822
+  WEAPP_TOKEN_CACHE_KEY: WEAPP_ACCESSTOKEN_CACHE_KEY
+  WEAPP_TOKEN_CACHE_TTL: 7200 - 600
+
+REDIS_CONFIG:
+  host: "127.0.0.1"  # redis 链接
+  port: 6379         # redis 端口
+  auth: "Kz3MPcGcT8PyHXHj.i"       # redis 连接密码
+  db: 0              # redis 数据库
