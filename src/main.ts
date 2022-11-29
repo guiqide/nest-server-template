@@ -16,7 +16,7 @@ async function bootstrap() {
     defaultVersion: '1',
     type: VersioningType.URI,
   });
-  app.use(cookieParser('lawsuit_access_token'));
+  app.use(cookieParser('project_access_token'));
 
   // 启动全局字段校验，保证请求接口字段校验正确。
   app.useGlobalPipes(new ValidationPipe());

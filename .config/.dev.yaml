@@ -1,19 +1,17 @@
-COOKIE_DOMAIN: "app.thedtstar.com"
-TEST_VALUE:
-  name: cookie
+COOKIE_DOMAIN: "localhost"
 MYSQL_CONFIG:
   type: "mysql"
   host: "127.0.0.1"
   port: 3306
   username: "root"
   password: "123456"
-  database: "lawsuit"
+  database: "project"
   synchronize: true
 
 WEAPP_CONFIG:
-  APPID: wx5a98f80f4f0faea3
-  APPSECRET: 185ce6d9549e4ceb18e216f3fa601822
-  WEAPP_TOKEN_CACHE_KEY: WEAPP_ACCESSTOKEN_CACHE_KEY
+  APPID: 小程序APPID
+  APPSECRET: 小程序APPSECRET
+  WEAPP_TOKEN_CACHE_KEY: 小程序redis key
   WEAPP_TOKEN_CACHE_TTL: 7200 - 600
 
 REDIS_CONFIG:
