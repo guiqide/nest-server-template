@@ -2,7 +2,7 @@ import { Injectable, Inject, Logger, CACHE_MANAGER } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Cache } from 'cache-manager';
 import { ConfigService } from '@nestjs/config';
-import { User } from './entities/user.mysql.entity';
+import { User } from './entities/user.entity';
 import { BUSINESS_ERROR_CODE } from '@/common/exceptions/business.error.codes';
 import { BusinessException } from 'src/common/exceptions/business.exception';
 import {
@@ -93,7 +93,6 @@ export class UserService {
       this.APP_TOKEN_CACHE_KEY,
     );
     const res = await fetchPhoneNumber(code, tokenObj.value);
-    console.log(res);
     if (!res.errcode) {
       const phoneInfo = res.phone_info;
       await this.userRepository.save({

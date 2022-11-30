@@ -22,8 +22,6 @@ export class JwtAdminStrategy extends PassportStrategy(Strategy, 'jwt-admin') {
   }
 
   async validate(payload: AdminPayload): Promise<AdminPayload> {
-    console.log(payload);
-
     return { ...payload };
   }
 }

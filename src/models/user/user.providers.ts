@@ -1,4 +1,4 @@
-import { User } from './entities/user.mysql.entity';
+import { User } from './entities/user.entity';
 
 export const UserProviders = [
   {

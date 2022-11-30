@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { UserService } from '@/models/user/user.service';
 import { WeappUserSession } from '@/models/user/dto/weapp-userinfo.dto';
-import { User } from '@/models/user/entities/user.mysql.entity';
+import { User } from '@/models/user/entities/user.entity';
 import { BusinessException, BUSINESS_ERROR_CODE } from '@/common/exceptions';
 
 @Injectable()

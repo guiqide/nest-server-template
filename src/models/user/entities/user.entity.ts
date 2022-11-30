@@ -12,8 +12,10 @@ import {
   Index,
   BeforeInsert,
 } from 'typeorm';
-// import * as bcrypt from 'bcryptjs';
+import * as bcrypt from 'bcryptjs';
 import { Exclude } from 'class-transformer';
+
+@Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -72,12 +74,12 @@ export class User {
   @Exclude()
   password: string;
 
-  // @BeforeInsert()
-  // async setPassword(password: string) {
-  //   const salt = await bcrypt.genSalt(8);
-  //   this.password = await bcrypt.hash(password || this.password, salt);
-  //   this.role = 6;
-  // }
+  @BeforeInsert()
+  async setPassword(password: string) {
+    const salt = await bcrypt.genSalt(8);
+    this.password = await bcrypt.hash(password || this.password, salt);
+    this.role = 6;
+  }
 
   @CreateDateColumn({
     type: 'datetime',

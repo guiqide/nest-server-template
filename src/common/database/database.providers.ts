@@ -1,5 +1,5 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { getConfig } from 'src/utils/index';
+import { getConfig } from '@/utils/index';
 import * as path from 'path';
 
 // 设置数据库类型
@@ -9,7 +9,7 @@ const { MYSQL_CONFIG } = getConfig();
 const MYSQL_DATABASE_CONFIG = {
   ...MYSQL_CONFIG,
   type: databaseType,
-  entities: [path.join(__dirname, `../../**/*.mysql.entity{.ts,.js}`)],
+  entities: [path.join(__dirname, `../../**/*.entity{.ts,.js}`)],
 };
 
 const MYSQL_DATA_SOURCE = new DataSource(MYSQL_DATABASE_CONFIG);
