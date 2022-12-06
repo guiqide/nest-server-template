@@ -35,3 +35,11 @@ docker start containerId
 
 ## nginx的创建命令
 docker run --name nginx -p 80:80 -v /Users/guiqide/files/github/project-docker/nginx-volume/nginx.conf:/etc/nginx/nginx.conf -v /Users/guiqide/files/github/project-docker/nginx-volume/log:/var/log/nginx -v /Users/guiqide/files/github/project-docker/nginx-volume/conf.d:/etc/nginx/conf.d -d nginx
+
+## k8s
+```
+docker image build . --tag server-api:tag // 打包镜像
+docker run -p 3000:3000 -d server-api:tag  // 执行包
+docker exec -it containerId bash pm2 logs // 查看日志
+docker exec -it containerId bash
+```
