@@ -1,10 +1,10 @@
-FROM node:lts
+FROM node:lts-alpine
 
 WORKDIR /app
 ADD . /app
 ENV PATH="${PATH}:/sbin"
-RUN yum update
-RUN yum install git
+RUN apk update
+RUN apk add git
 RUN npm install pm2 -g
 RUN npm install
 CMD npm run pm2 && tail -f /dev/null
