@@ -1,11 +1,11 @@
 COOKIE_DOMAIN: "localhost"
 MYSQL_CONFIG:
   type: "mysql"
-  host: "127.0.0.1"
+  host: "192.168.4.206"
   port: 3306
   username: "root"
-  password: "123456"
-  database: "database"
+  password: "6ZJg*GcWc*KkevvKX8"
+  database: "demo"
   synchronize: true
 
 WEAPP_CONFIG:
@@ -15,7 +15,7 @@ WEAPP_CONFIG:
   WEAPP_TOKEN_CACHE_TTL: 7200 - 600
 
 REDIS_CONFIG:
-  host: "127.0.0.1"  # redis 链接
+  host: "192.168.12.244"  # redis 链接
   port: 6379         # redis 端口
   auth: "password"       # redis 连接密码
   db: 0              # redis 数据库
