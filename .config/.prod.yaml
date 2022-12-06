@@ -17,5 +17,5 @@ WEAPP_CONFIG:
 REDIS_CONFIG:
   host: "192.168.12.244"  # redis 链接
   port: 6379         # redis 端口
-  auth: "password"       # redis 连接密码
+  auth: "Kz3MPcGcT8PyHXHj.i"       # redis 连接密码
   db: 0              # redis 数据库
