@@ -2,6 +2,7 @@ FROM node:slim
 
 WORKDIR /app
 ADD . /app
+ENV PATH="${PATH}:/sbin"
 RUN apk update
 RUN apk add git
 RUN npm install pm2 -g
