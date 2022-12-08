@@ -73,7 +73,6 @@ export class UserService {
       where: {
         id: user.userId,
       },
-      relations: ['company'],
     });
     if (!userInfo) {
       throw new BusinessException({
@@ -109,8 +108,6 @@ export class UserService {
   }
 
   async findAll() {
-    return this.userRepository.find({
-      relations: ['company'],
-    });
+    return this.userRepository.find();
   }
 }

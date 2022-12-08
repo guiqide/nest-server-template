@@ -13,7 +13,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { getConfig } from '@/utils/config';
 import { PayloadUser } from '@/helper';
 import { Response } from 'express';
-import { Public } from './constants';
+import { Public, COOKIE_PREFIX } from './constants';
 import { WeappAuthGuard, AdminAuthGuard } from './guards';
 import { AuthService } from './auth.service';
 import { LoginWeappDto } from '@/models/user/dto';
@@ -27,6 +27,7 @@ export class AuthController {
     return user;
   }
 
+  @ApiTags('用户——用户端')
   @ApiOperation({
     summary: '微信授权登录',
     description: '通过 code 获取`openid`',
@@ -45,37 +46,44 @@ export class AuthController {
     };
   }
 
+  @ApiTags('用户——管理端')
+  @ApiOperation({
+    summary: '后台管理端登录',
+    description: '用户名和密码',
+  })
+  @Public()
+  @Post('/admin/login')
+  async getAdminTokenByWeb(
+    @Body() loginAdminDto: LoginAdminDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    const { accessToken } = await this.authService.loginAdmin(loginAdminDto);
+    response.cookie(COOKIE_PREFIX, accessToken, {
+      path: '/',
+    });
+    return {
+      accessToken,
+    };
+  }
+
+  @ApiTags('用户——管理端')
   @ApiOperation({
     summary: '后台管理端登录',
     description: '用户名和密码',
   })
   @UseGuards(AdminAuthGuard)
   @Public()
-  @Post('/admin/login')
-  async getAdminTokenByWeb(@PayloadUser() user: AdminPayload) {
-    const { accessToken } = await this.authService.loginAdmin(user);
-    return {
-      accessToken,
-    };
+  @Post('/admin/logout')
+  async logoutByWeb(@Res({ passthrough: true }) res: Response) {
+    res.cookie(COOKIE_PREFIX, null, {
+      path: '/',
+      httpOnly: true,
+      expires: new Date(0),
+    });
+    res.cookie(COOKIE_PREFIX + '_expires_in', +new Date(0), {
+      path: '/',
+      expires: new Date(0),
+    });
+    return null;
   }
-
-  // @ApiOperation({
-  //   summary: '后台管理端登录',
-  //   description: '用户名和密码',
-  // })
-  // @UseGuards(AdminAuthGuard)
-  // @Public()
-  // @Post('/admin/logout')
-  // async logoutByWeb(@Res({ passthrough: true }) res: Response) {
-  //   res.cookie('project_access_token', null, {
-  //     path: '/',
-  //     httpOnly: true,
-  //     expires: new Date(0),
-  //   });
-  //   res.cookie('project_access_token_expires_in', +new Date(0), {
-  //     path: '/',
-  //     expires: new Date(0),
-  //   });
-  //   return null;
-  // }
 }

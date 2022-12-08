@@ -5,6 +5,7 @@ import { VersioningType, ValidationPipe } from '@nestjs/common';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { AllExceptionsFilter } from './common/exceptions/base.exception.filter';
 import { HttpExceptionFilter } from './common/exceptions/http.exception.filter';
+import { COOKIE_PREFIX } from '@/models/auth/constants';
 import { getEnv } from './utils/config';
 import { generateDocument } from './doc';
 
@@ -16,7 +17,7 @@ async function bootstrap() {
     defaultVersion: '1',
     type: VersioningType.URI,
   });
-  app.use(cookieParser('project_access_token'));
+  app.use(cookieParser(COOKIE_PREFIX));
 
   // 启动全局字段校验，保证请求接口字段校验正确。
   app.useGlobalPipes(new ValidationPipe());

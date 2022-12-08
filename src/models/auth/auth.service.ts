@@ -6,6 +6,7 @@ import { UserService } from '@/models/user/user.service';
 import { WeappUserSession } from '@/models/user/dto/weapp-userinfo.dto';
 import { User } from '@/models/user/entities/user.entity';
 import { BusinessException, BUSINESS_ERROR_CODE } from '@/common/exceptions';
+import { LoginAdminDto } from '../user/dto';
 
 @Injectable()
 export class AuthService {
@@ -40,7 +41,7 @@ export class AuthService {
     if (!user) {
       throw new BusinessException({
         code: BUSINESS_ERROR_CODE.PASSWORD_INVALID,
-        message: '密码错误',
+        message: '用户名错误',
       });
     }
 
@@ -85,9 +86,13 @@ export class AuthService {
   }
 
   // jwt 登录
-  async loginAdmin(user: AdminPayload) {
+  async loginAdmin(loginAdminDto: LoginAdminDto) {
+    const adminPayload = await this.validateAdmin(
+      loginAdminDto.username,
+      loginAdminDto.password,
+    );
     return {
-      accessToken: this.jwtService.sign(user),
+      accessToken: this.jwtService.sign(adminPayload),
     };
   }
 }

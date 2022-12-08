@@ -17,6 +17,7 @@ export class JwtAdminGuard extends AuthGuard('jwt-admin') {
       context.getHandler(),
       context.getClass(),
     ]);
+    console.log(loginAuth);
 
     if (loginAuth) {
       return true;
@@ -26,6 +27,7 @@ export class JwtAdminGuard extends AuthGuard('jwt-admin') {
   }
 
   handleRequest(err, user, info) {
+    console.log(err, user, info);
     if (err || !user) {
       throw (
         err ||

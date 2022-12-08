@@ -25,7 +25,6 @@ export class WeappUserInfo {
   avatarUrl?: string;
   nickName?: string;
   phoneNumber?: string;
-  companyId?: string;
   role?: string;
 }
 
