@@ -13,8 +13,9 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { getConfig } from '@/utils/config';
 import { PayloadUser } from '@/helper';
 import { Response } from 'express';
+import * as moment from 'moment';
 import { Public, COOKIE_PREFIX } from './constants';
-import { WeappAuthGuard, AdminAuthGuard } from './guards';
+import { WeappAuthGuard, AdminAuthGuard, JwtAdminGuard } from './guards';
 import { AuthService } from './auth.service';
 import { LoginWeappDto } from '@/models/user/dto';
 import { LoginAdminDto } from '@/models/user/dto';
@@ -60,6 +61,8 @@ export class AuthController {
     const { accessToken } = await this.authService.loginAdmin(loginAdminDto);
     response.cookie(COOKIE_PREFIX, accessToken, {
       path: '/',
+      httpOnly: true,
+      expires: moment().add(1, 'd').toDate(),
     });
     return {
       accessToken,
@@ -71,9 +74,9 @@ export class AuthController {
     summary: '后台管理端登录',
     description: '用户名和密码',
   })
-  @UseGuards(AdminAuthGuard)
+  @UseGuards(JwtAdminGuard)
   @Public()
-  @Post('/admin/logout')
+  @Get('/admin/logout')
   async logoutByWeb(@Res({ passthrough: true }) res: Response) {
     res.cookie(COOKIE_PREFIX, null, {
       path: '/',
